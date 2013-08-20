@@ -1,0 +1,12 @@
+<!-- Return all static resource requests. -->
+<rule match-path="/static/*" comment="Static Files">
+	<set-cache aggressive="true" cookies="ignore" insecure="true" />
+	<prerequisite>
+		<!-- Populate the static_res variable with the current request path -->
+		<setvar name="static_res" expr="request.path.substr(1)"/>
+	</prerequisite>
+	<compose>
+		<!-- Fetch and return the static resource -->
+		<fetch type="local" url="${static_res}"/>
+	</compose>
+</rule>
